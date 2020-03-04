@@ -1,7 +1,11 @@
 package com.learntodroid.postrequestwithjson;
 
 public class Comment {
-    private String title, comment, author;
+    private String title;
+
+    private String comment;
+
+    private String author;
 
     public Comment(String title, String comment, String author) {
         this.title = title;

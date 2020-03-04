@@ -29,12 +29,6 @@
             android:text="Form Encoded (Field Set)"
             android:id="@+id/activity_comments_post_type_form_encoded_field_set" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Multipart"
-            android:id="@+id/activity_comments_post_type_multipart" />
-
     </RadioGroup>
 
     <EditText

@@ -6,12 +6,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
 import java.util.HashMap;
 
+import okhttp3.Request;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,38 +53,28 @@ public class CommentsActivity extends AppCompatActivity {
                         return;
 
                     case R.id.activity_comments_post_type_json_body:
-                        commentsRepository.getCommentsService().createComment(c).enqueue(new Callback<ResponseBody>() {
+                        commentsRepository.getCommentsService().createComment(c).enqueue(new Callback<Comment>() {
                             @Override
-                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> r) {
-                                try {
-                                    String responseString = r.body().string();
-                                    Log.i("onResponse", responseString);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                            public void onResponse(Call<Comment> call, Response<Comment> r) {
+                                Toast.makeText(getApplicationContext(), "Comment " + r.body().getComment() + " created", Toast.LENGTH_SHORT).show();
                             }
                             @Override
-                            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                            public void onFailure(Call<Comment> call, Throwable t) {
+                                Toast.makeText(getApplicationContext(), "Error Creating Comment: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                         return;
 
                     case R.id.activity_comments_post_type_form_encoded_fields:
-                        commentsRepository.getCommentsService().createComment(c.getTitle(), c.getComment(), c.getAuthor()).enqueue(new Callback<ResponseBody>() {
+                        commentsRepository.getCommentsService().createComment(c.getTitle(), c.getComment(), c.getAuthor()).enqueue(new Callback<Comment>() {
                             @Override
-                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> r) {
-                                try {
-                                    String responseString = r.body().string();
-                                    Log.i("onResponse", responseString);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                            public void onResponse(Call<Comment> call, Response<Comment> r) {
+                                Toast.makeText(getApplicationContext(), "Comment " + r.body().getComment() + " created", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
-                            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                            public void onFailure(Call<Comment> call, Throwable t) {
+                                Toast.makeText(getApplicationContext(), "Error Creating Comment: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                         return;
@@ -92,25 +84,17 @@ public class CommentsActivity extends AppCompatActivity {
                         fields.put("title", c.getTitle());
                         fields.put("comment", c.getComment());
                         fields.put("author", c.getAuthor());
-                        commentsRepository.getCommentsService().createComment(fields).enqueue(new Callback<ResponseBody>() {
+                        commentsRepository.getCommentsService().createComment(fields).enqueue(new Callback<Comment>() {
                             @Override
-                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> r) {
-                                try {
-                                    String responseString = r.body().string();
-                                    Log.i("onResponse", responseString);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                            public void onResponse(Call<Comment> call, Response<Comment> r) {
+                                Toast.makeText(getApplicationContext(), "Comment " + r.body().getComment() + " created", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
-                            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                            public void onFailure(Call<Comment> call, Throwable t) {
+                                Toast.makeText(getApplicationContext(), "Error Creating Comment: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
-                        return;
-
-                    case R.id.activity_comments_post_type_multipart:
                         return;
 
                     default:
