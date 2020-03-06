@@ -1,10 +1,15 @@
 package com.learntodroid.postrequestwithjson;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Comment {
+    @SerializedName("title")
     private String title;
 
+    @SerializedName("comment")
     private String comment;
 
+    @SerializedName("author")
     private String author;
 
     public Comment(String title, String comment, String author) {
