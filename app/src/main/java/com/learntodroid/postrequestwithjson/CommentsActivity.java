@@ -37,7 +37,7 @@ public class CommentsActivity extends AppCompatActivity {
         radioGroup = findViewById(R.id.activity_comments_post_type);
         send = findViewById(R.id.activity_comments_send);
 
-        commentsRepository = new CommentsRepository();
+        commentsRepository = commentsRepository.getInstance();
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override

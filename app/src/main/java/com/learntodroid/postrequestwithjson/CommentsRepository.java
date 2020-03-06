@@ -5,8 +5,17 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CommentsRepository {
+public final class CommentsRepository {
+    private static CommentsRepository instance;
+
     private CommentsService commentsService;
+
+    public static CommentsRepository getInstance() {
+        if (instance == null) {
+            instance = new CommentsRepository();
+        }
+        return instance;
+    }
 
     public CommentsRepository() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -21,7 +30,6 @@ public class CommentsRepository {
 
         commentsService = retrofit.create(CommentsService.class);
     }
-
 
     public CommentsService getCommentsService() {
         return commentsService;
